@@ -1,6 +1,11 @@
 from flask import Flask, request, jsonify
+import redis
 
 app = Flask(__name__)
+
+
+r = redis.Redis(host='localhost', port=6379, db=0)
+
 
 resultats = {}
 
@@ -22,18 +27,20 @@ def calcul():
     elif operation == "/":
         resultat = operandes[0] / operandes[1]
 
-    id = len(resultats) + 1
-    resultats[id] = resultat
+    id = len(r.keys()) + 1
+    #resultats[id] = resultat
+    r.set(id,resultat)
 
     return jsonify({"id": id})
 
 @app.route("/api/resultat/<int:id>", methods=["GET"])
 def resultat(id):
 
-    if id not in resultats:
-        return jsonify({"erreur": "ID inexistant"})
+    #if id not in resultats:
+    #    return jsonify({"erreur": "ID inexistant"})
 
-    return jsonify({"resultat": resultats[id]})
+    resultat = r.get(id)
+    return jsonify({"resultat": resultat}) #resultats[id]
 
 if __name__ == "__main__":
     app.run(debug=True)
