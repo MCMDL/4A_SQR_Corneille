@@ -11,7 +11,9 @@ resultats = {}
 
 @app.route("/api/calcul", methods=["POST"])
 def calcul():
-
+    id = r.get('id')
+    if id ==  None:
+        id = 0
     data = request.get_json()
     operation = data["operation"]
     operandes = data["operandes"]
