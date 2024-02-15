@@ -1,0 +1,103 @@
+/* Couleurs */
+body {
+    background-color: #DB6A8F;
+    color: #fff; /* Couleur du texte en blanc */
+    font-family: sans-serif; /* Use a readable font */
+}
+
+a {
+    color: #0073b7;
+}
+
+/* Header */
+header {
+    background-color: #DB6A8F;
+    padding: 10px;
+    text-align: center;
+    width: 100%; /* Make header full width */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em; /* Increase header size */
+}
+
+/* Main */
+main {
+    padding: 10px;
+    margin: 0 auto; /* Center the main content horizontally */
+    width: 80%; /* Set a fixed width for better responsiveness */
+}
+
+/* Nouveau tweet */
+.nouveau-tweet {
+    background-color: #E8AABE;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd; /* Add thin border */
+}
+
+.nouveau-tweet textarea {
+    width: 98%;
+    height: 100px;
+    border: none; /* Remove default border */
+    padding: 10px;
+    resize: none; /* Disable textarea resizing */
+}
+
+.nouveau-tweet button {
+    background-color: #C49FFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px; /* Add spacing after textarea */
+}
+
+/* Flux tweets */
+.flux-tweets {
+    background-color: #E8AABE;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd; /* Add thin border */
+}
+
+.flux-tweets h2 {
+    margin-top: 0;
+    font-size: 1.5em; /* Adjust heading size */
+}
+
+.flux-tweets ul {
+    list-style: none;
+    padding: 0;
+}
+
+.flux-tweets li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.flux-tweets .avatar {
+    float: left;
+    margin-right: 10px;
+    border-radius: 50%; /* Round avatar image */
+}
+
+.flux-tweets .avatar img {
+    width: 48px;
+    height: 48px;
+}
+
+.flux-tweets .contenu-tweet {
+    overflow: hidden;
+}
+
+.flux-tweets .contenu-tweet strong {
+    font-weight: bold;
+}
+
+.flux-tweets .contenu-tweet p {
+    margin: 0;
+}
