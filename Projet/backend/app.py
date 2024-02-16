@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import redis
 import time 
+import json
 
 app = Flask(__name__)
 
@@ -22,10 +23,23 @@ def tweeter():
     #Ajout du Tweet à l'utilisateur
     userKey = "u-"+username
     #CHANGER POUR METTRE JSON A LA PLACE DE LA LISTE
-    r.rpush(userKey,ts)
-    #Ajouter de quoi extraire les "#"
+    listTs = r.get(userKey)
+    if listTs == None:
+        list  = [ts]
+        listJson = json.loads(str(list))
+        r.set(userKey, listJson)
+    else:
+        list = json.dumps(listTs)
+        list.append(ts)
+        listJson = json.loads(str(list))
+        r.set(userKey, listJson)
+
+
+
+    #Ajouter de quoi extraire les "#" fonction findall(r"#\w+", tweet)
     print(username+"\n")
     print(tweet)
+    temp = "Tweet ajouté : " + tweet +" By :" + username
     return "tweet ajouté"
 
 
