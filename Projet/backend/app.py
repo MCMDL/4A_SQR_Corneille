@@ -8,6 +8,15 @@ app = Flask(__name__)
 
 r = redis.Redis(host='localhost', port=6379, db=0)
 
+def foundHashtag(str1):
+    list1 = str1.split(" ")
+    topic = []
+    for value in list1:
+        temp = value.find("#")
+        if temp != -1:
+            temp = value.split("#")
+            topic.append(temp[1])
+    return topic
 
 resultats = {}
 
@@ -22,7 +31,7 @@ def tweeter():
     r.set(ts, value)
     #Ajout du Tweet à l'utilisateur
     userKey = "u-"+username
-    #CHANGER POUR METTRE JSON A LA PLACE DE LA LISTE
+    #
     listTs = r.get(userKey)
     if listTs == None:
         list  = [ts]
