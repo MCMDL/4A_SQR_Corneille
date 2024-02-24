@@ -22,29 +22,30 @@ resultats = {}
 @app.route("/api/tweeter", methods=["POST"])
 def tweeter():
     #Ajout d'un tweet a Redis
-    id= r.get("idTweet")
+    idTweet= r.get("idTweet")
     if id==None:
         r.set("idTweet",0)
-    id = int(r.get("idTweet"))
-    id = id +1
+    idTweet = int(r.get("idTweet"))
+    idTweet = idTweet +1
     data = request.get_json()
     tweet = data["tweet"]
     username = data["username"]
     value='{"author": username, "tweet": tweet }'
-    r.set(id, value)
+    r.set(idTweet, value)
     #Ajout du Tweet à l'utilisateur
     userKey = "u-"+username
-    #
-    listTs = r.get(userKey)
-    if listTs == None:
-        liste = [id]
-        listeJson  = json.loads(str(liste))
-        r.set(userKey, listeJson)
-    else:
-        liste = json.dumps(listTs)
-        liste.append(id)
-        listeJson = json.loads(str(liste))
-        r.set(userKey, listeJson)
+    r.rpush(userKey,idTweet)
+
+    # listTs = r.get(userKey)
+    # if listTs == None:
+    #     liste = [id]
+    #     listeJson  = json.loads(str(liste))
+    #     r.set(userKey, listeJson)
+    # else:
+    #     liste = json.dumps(listTs)
+    #     liste.append(id)
+    #     listeJson = json.loads(str(liste))
+    #     r.set(userKey, listeJson)
 
 
 
@@ -52,7 +53,7 @@ def tweeter():
     print(username+"\n")
     print(tweet)
     temp = "Tweet ajouté : " + tweet +" By :" + username
-    return "tweet ajouté"
+    return temp
 
 
 @app.route("/api/printTweet", methods=["GET"])
