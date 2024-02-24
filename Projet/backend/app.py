@@ -22,8 +22,8 @@ resultats = {}
 @app.route("/api/tweeter", methods=["POST"])
 def tweeter():
     #Ajout d'un tweet a Redis
-    idTweet= r.get("idTweet")
-    if id==None:
+    idTweet = r.get("idTweet")
+    if idTweet==None:
         r.set("idTweet",0)
     idTweet = int(r.get("idTweet"))
     idTweet = idTweet +1
