@@ -1,12 +1,11 @@
 from flask import Flask, request, jsonify
 import redis
-import time 
 import json
 
 app = Flask(__name__)
 
 
-r = redis.Redis(host='localhost', port=6379, db=0)
+r = redis.Redis(host='localhost', port=6379, db=0,decode_responses=True)
 
 def foundHashtag(str1):
     list1 = str1.split(" ")
@@ -23,25 +22,29 @@ resultats = {}
 @app.route("/api/tweeter", methods=["POST"])
 def tweeter():
     #Ajout d'un tweet a Redis
-    ts = time.time()
+    id= r.get("idTweet")
+    if id==None:
+        r.set("idTweet",0)
+    id = int(r.get("idTweet"))
+    id = id +1
     data = request.get_json()
     tweet = data["tweet"]
     username = data["username"]
     value='{"author": username, "tweet": tweet }'
-    r.set(ts, value)
+    r.set(id, value)
     #Ajout du Tweet à l'utilisateur
     userKey = "u-"+username
     #
     listTs = r.get(userKey)
     if listTs == None:
-        list  = [ts]
-        listJson = json.loads(str(list))
-        r.set(userKey, listJson)
+        liste = [id]
+        listeJson  = json.loads(str(liste))
+        r.set(userKey, listeJson)
     else:
-        list = json.dumps(listTs)
-        list.append(ts)
-        listJson = json.loads(str(list))
-        r.set(userKey, listJson)
+        liste = json.dumps(listTs)
+        liste.append(id)
+        listeJson = json.loads(str(liste))
+        r.set(userKey, listeJson)
 
 
 
@@ -52,8 +55,14 @@ def tweeter():
     return "tweet ajouté"
 
 
-# @app.route("/api/printTweet", methods=["GET"])
-# def printTweet(id):
+@app.route("/api/printTweet", methods=["GET"])
+def printTweet(id):
+    value = r.get(id)
+    if value == None:
+        return "ERROR: Tweet doesn't exist"
+    tweet = value[tweet]
+    return tweet
+    
 
 # @app.route("/api/saveTweet", methods=["POST"])
 # def saveTweet(id):
