@@ -1,8 +1,8 @@
 from flask import Flask, request, jsonify
 import redis
 import json
-
 app = Flask(__name__)
+
 
 
 r = redis.Redis(host='localhost', port=6379, db=0,decode_responses=True)
