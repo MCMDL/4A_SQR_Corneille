@@ -49,36 +49,54 @@ def tweeter():
 
 @app.route("/api/printTweet", methods=["GET"])
 def printTweet():
-    idTweet = int(r.get("idTweet"))
-    print(idTweet)
-    if idTweet == None:
-        return "ERROR: Tweet doesn't exist"
-    temp = ""
-    for i in range (1,idTweet): 
-        tweet = str(r.get(i))
-        temp = temp + tweet +"\n"
-    return temp
+    #Recuperation du dernier id de tweet
+    numberOfTweet = int(r.get("idTweet"))
+    tweets = []
+    #Récupération de tous les tweets dans une liste
+    for i in range(numberOfTweet):
+        tweets.append(r.get(i))
+    #Renvoie des tweets au format JSON
+    return json.loads(str(tweets))
+
 
 
 @app.route("/api/printPersonnalTweet", methods=["GET"])
 def printPersonnalTweet(username):
     tweets = []
     userKey = "u-"+username
+    #Ajout de tous les tweets à une liste 
     for i in range(r.llen(userKey)):
-        tweet = r.lindex(userKey,i)
-        tweets.append(tweet)
-        print(tweet)
+        index = r.lindex(userKey,i)
+        tweets.append(r.get(index))
+        print(r.get(index))
+    #Passage de la liste en Json pour la retourner
     jsonList= json.loads(str(tweets))
     return jsonList
 
-# @app.route("/api/retweet", methods=["POST"])
-# def retweet(id):
+@app.route("/api/retweet", methods=["POST"])
+def retweet(idTweet,username):
+    userKey = "u-"+username
+    #Ajout du tweet à l'utilisateur qui retweet
+    for i in range(r.llen(userKey)):
+        if r.lindex(userKey,i) == idTweet:
+            return "ERROR : Tweet already retweeted"
+    r.rpush(userKey, idTweet)
+    return "Tweet retweeted"
+    
 
 # @app.route("/api/printTopic", methods=["GET"])
 # def printTopic(id):
 
-# @app.route("/api/printSpecificTweet", methods=["GET"])
-# def printSpecificTweet(id):
+@app.route("/api/printSpecificTweet", methods=["GET"])
+def printSpecificTweet(idTweet):
+    #Recuperation du dernier id de tweet
+    numberOfTweet = int(r.get("idTweet"))
+    print(idTweet)
+    #Verification de l'existence du tweet
+    if idTweet == None or idTweet <0 or idTweet>=numberOfTweet:
+        return "ERROR: Tweet doesn't exist"
+    temp = r.get(idTweet)
+    return temp
 
 if __name__ == "__main__":
     app.run(debug=True)
