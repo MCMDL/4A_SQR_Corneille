@@ -58,23 +58,18 @@ def printTweet():
         tweet = str(r.get(i))
         temp = temp + tweet +"\n"
     return temp
-        # if tweet != None:
-        #     print(tweet)
-        #     # Désérialisation de la valeur JSON
-        #     dataFinale = json.loads(tweet)
-        #     temp = temp + dataFinale + "\n"
-        #     return temp
-        # else: 
-        #     print("ERROR: JSON value is empty")
-        #     return "ERROR: JSON value is empty"
 
-    
 
-# @app.route("/api/saveTweet", methods=["POST"])
-# def saveTweet(id):
-
-# @app.route("/api/printPersonnalTweet", methods=["GET"])
-# def printPersonnalTweet(id):
+@app.route("/api/printPersonnalTweet", methods=["GET"])
+def printPersonnalTweet(username):
+    tweets = []
+    userKey = "u-"+username
+    for i in range(r.llen(userKey)):
+        tweet = r.lindex(userKey,i)
+        tweets.append(tweet)
+        print(tweet)
+    jsonList= json.loads(str(tweets))
+    return jsonList
 
 # @app.route("/api/retweet", methods=["POST"])
 # def retweet(id):
