@@ -1,0 +1,1 @@
+curl -X POST http://localhost:5000/api/tweeter -H "Content-Type: application/json" -d '{"tweet": "Ceci est un tweet de test avec #hashtag1 et #hashtag2", "username": "A"}' 
