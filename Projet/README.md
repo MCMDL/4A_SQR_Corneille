@@ -21,7 +21,7 @@ Le but du backend est de mettre en place les API citées dans la partie Objectif
 
 ## Exécuter le projet
 Pour lancer le projet il faut réaliser les étapes suivantes : 
--Exécuter le code Python présent dans le backend. ([Le voilà](\backend\app.py) :upside_down_face:)
--Exécuter dans le terminal la commande suivante : docker run -p 6379:6379 --name myredis redis
+- Exécuter le code Python présent dans le backend. ([Le voilà](\backend\app.py) :upside_down_face:)  
+- Exécuter dans le terminal la commande suivante : docker run -p 6379:6379 --name myredis redis
 >[!IMPORTANT]
 >Erreur possible du au nom du container ne pas hésiter à changer *myredis* par un autre nom. 
