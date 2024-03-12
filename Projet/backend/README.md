@@ -10,7 +10,7 @@ Nous avons donc définis les fonctions suivantes :
 - `retweet`
 - `printSpecificTweet`
 - `printTopic`
-- `printTweetsTopic`
+- `printTweetsTopic`  
 Toutes les fonctions se trouvent après le chemin `api/`.
 ### Fonction `tweeter`
 Cette fonction sert à récupérer les informations présentes dans un Tweet i.e, le Tweet, l'utilisateur, et les hashtags présents dans le Tweet. Elle est basée sur un `POST`
