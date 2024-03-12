@@ -56,7 +56,7 @@ def tweeter():
             hashKey = "h-" + hashtag
             #Stockage du nom du topic s'il n'existe pas
             if r.lindex(hashKey,0)==None:
-                r.rpush(idHash, hashtag)
+                r.rpush("hashList", hashtag)
                 idHash = idHash + 1
             #Ajout du tweet
             r.rpush(hashKey,idTweet)
@@ -130,7 +130,7 @@ def printTopic():
     hashtags = []
     #Récupération de tous les hashtags dans une liste
     for i in range(numberOfHashtags):
-        hashtags.append(r.get(i))
+        hashtags.append(r.lindex("hashList",i))
     #Renvoie des hashtags au format JSON
     return json.loads(str(hashtags))
 
