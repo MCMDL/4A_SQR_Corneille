@@ -19,6 +19,7 @@ def foundHashtag(str1):
 
 resultats = {}
 
+#API pour recupérer toutes les données liées à un tweet
 @app.route("/api/tweeter", methods=["POST"])
 def tweeter():
     #Creation de l'ID du tweet
@@ -36,17 +37,39 @@ def tweeter():
     dico = json.dumps({"utilisateur": username, "message": tweet})
     # Stockage dans Redis
     r.set(idTweet, dico)
-    #value={"author": username, "tweet": tweet }
     #Ajout du Tweet à l'utilisateur
     userKey = "u-"+username
     r.rpush(userKey,idTweet)
-    #Ajouter de quoi extraire les "#" fonction findall(r"#\w+", tweet)
+
+
+    #Récupération des Hashtag dans le tweet
+    idHash = r.get("idHash")
+    if idHash==None:
+        r.set("idHash",0)
+    idHash = int(r.get("idHash"))
+    idHash = idHash +1
+    hashtags = foundHashtag(tweet)
+    #Verification de la présence de hashtags
+    if len(hashtags)!=0:
+        for hashtag in hashtags:
+            #Création de la clef pour stocker les hastags
+            hashKey = "h-" + hashtag
+            #Stockage du nom du topic s'il n'existe pas
+            if r.lindex(hashKey,0)==None:
+                r.rpush(idHash, hashtag)
+                idHash = idHash + 1
+            #Ajout du tweet
+            r.rpush(hashKey,idTweet)
+            print("Sujet : " + hashtag + "\n")
+    r.set("idHash",idHash)
+    #Affichage des infos récupérées + return
     print(username+"\n")
     print(tweet)
     temp = "Tweet ajouté : " + tweet +" By :" + username +" Id is : " + str(idTweet)
+
     return temp
 
-
+#API pour retourner tous les tweets connus
 @app.route("/api/printTweet", methods=["GET"])
 def printTweet():
     #Recuperation du dernier id de tweet
@@ -59,7 +82,7 @@ def printTweet():
     return json.loads(str(tweets))
 
 
-
+#API pour retourner tous les tweets d'un utlisateur
 @app.route("/api/printPersonnalTweet", methods=["GET"])
 def printPersonnalTweet(username):
     tweets = []
@@ -73,6 +96,7 @@ def printPersonnalTweet(username):
     jsonList= json.loads(str(tweets))
     return jsonList
 
+#API pour retweeter
 @app.route("/api/retweet", methods=["POST"])
 def retweet(idTweet,username):
     userKey = "u-"+username
@@ -84,9 +108,8 @@ def retweet(idTweet,username):
     return "Tweet retweeted"
     
 
-# @app.route("/api/printTopic", methods=["GET"])
-# def printTopic(id):
 
+#API pour retourner un tweet particulier
 @app.route("/api/printSpecificTweet", methods=["GET"])
 def printSpecificTweet(idTweet):
     #Recuperation du dernier id de tweet
@@ -97,6 +120,32 @@ def printSpecificTweet(idTweet):
         return "ERROR: Tweet doesn't exist"
     temp = r.get(idTweet)
     return temp
+
+
+#API pour afficher tous les  hashtags connus
+@app.route("/api/printTopic", methods=["GET"])
+def printTopic():
+    #Recuperation du dernier idHash
+    numberOfHashtags = int(r.get("idHash"))
+    hashtags = []
+    #Récupération de tous les hashtags dans une liste
+    for i in range(numberOfHashtags):
+        hashtags.append(r.get(i))
+    #Renvoie des hashtags au format JSON
+    return json.loads(str(hashtags))
+
+#Récupération de tous les tweets liés à un hashtag
+@app.route("/api/printTweetsTopic", methods=["GET"])
+def printTweetsTopic(hashtag):
+    #Recuperation de la hashKey
+    hashkey = "h-" + hashtag
+    tweets = []
+    index = 0
+    #Recuperation de tous les tweets liés à un tag
+    while r.lindex(hashkey, index) != None:
+        tweets.append(r.lindex(hashkey, index))
+        index = index +1
+    return json.loads(str(tweets))
 
 if __name__ == "__main__":
     app.run(debug=True)
