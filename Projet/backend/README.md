@@ -1,5 +1,5 @@
 # API Python 
-Toutes les API ont été créées avec `'Flask` et utilisent `Reddis` pour stocker les données
+Toutes les API ont été créées avec `Flask` et utilisent `Reddis` pour stocker les données
 
 ## Aperçu du code
 Le code met en place les fonctions nécessaires pour répondre aux exigeances définies pour le projet.  
