@@ -11,7 +11,9 @@ Nous avons donc définis les fonctions suivantes :
 - `printSpecificTweet`
 - `printTopic`
 - `printTweetsTopic`  
+
 Toutes les fonctions se trouvent après le chemin `api/`.
+
 ### Fonction `tweeter`
 Cette fonction sert à récupérer les informations présentes dans un Tweet i.e, le Tweet, l'utilisateur, et les hashtags présents dans le Tweet. Elle est basée sur un `POST`
 - Un Tweet est stocké à l'aide d'une clef qui est un entier. Le dernier ID utilisé est stocké à l'aide de la clef `"idTweet"`.
@@ -19,7 +21,7 @@ Cette fonction sert à récupérer les informations présentes dans un Tweet i.e
 - Les hashtags sont enregitrés avec une clef de la forme `h-hashtag` auquel on ajoute la liste des Tweets avec ce hashtag. La liste de tous les hashtags est stockés avec la clef `"hashList"`
 
 ### Fonction `printTweet` 
-Cette fonction utilisant un `GET`ressort tous les tweets déja stockés. Elle est utile pour récupérer les Tweets pour les afficher sur la page d'accueil.
+Cette fonction utilisant un `GET` ressort tous les tweets déja stockés. Elle est utile pour récupérer les Tweets pour les afficher sur la page d'accueil.
 
 ### Fonction `printPersonnalTweet`
 Cette fonction utilise un `GET` et  nécessite en entrée un username. A l'aide de cet input on recrée la clef `u-username` et on ressort tous les tweets associés à l'utilisateur.
@@ -32,29 +34,6 @@ Cette méthode utilise un `GET` et à partir d'un ID donné en entrée elle ress
 
 ### Fonction `printTopic`
 Cette méthode basée sur un `GET` retourne tous les hashtags enregistrés i.e toutes les valeurs stockées avec la clef `hashList`.
+
 ### Fonction `printTweetTopic`
 Cette méthode basée sur un `GET` retourne tous les Tweets liées à un sujet en particulier. Elle nécessite un sujet en input.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#Commandes à éxécuter : 
-
-1- docker run -p 6379:6379 --name myredis redis
-2- docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.12-management
-3-  curl -X POST http://localhost:5000/api/tweeter -H "Content-Type: application/json" -d '{"tweet": "salut ceci est un tweet","username":"A"}'
-
-
