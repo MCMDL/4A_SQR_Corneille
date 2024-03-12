@@ -14,14 +14,16 @@ L'objectif est de créer des API pour pouvoir réaliser les action suivantes :
 ## Frontend
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)  
+
 Informations techniques disponible [ici](/Projet/frontend/README.md).  
 Le rôle du frontend est de communiquer avec l'API, on peut donc envoyer des tweets, les afficher ou encore réaliser les actions cités dans la partie Objectifs.
 
 ## Backend
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
-![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white)
+![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white)  
+
 Informations techniques disponible [ici](/Projet/backend/README.md).  
 Le but du backend est de mettre en place les API citées dans la partie Objectifs. Pour cela on utilse la librairie `Flask` et les données sont gérées à l'aide la base de données NoSQL `Redis`.
 
