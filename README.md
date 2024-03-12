@@ -1,1 +1,1 @@
-[Lien vers le projet](/projet/README.md)
+[Lien vers le projet](/Projet/README.md)
