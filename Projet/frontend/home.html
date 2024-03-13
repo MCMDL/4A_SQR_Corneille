@@ -12,22 +12,20 @@
     </header>
     <main>
         <section class="nouveau-tweet">
-            <form action="#">
-                <textarea name="tweet" placeholder="Que se passe-t-il ?"></textarea>
-                <button type="submit">Tweeter</button>
+            <form id="tweetForm"> <!-- Ajout de l'ID au formulaire -->
+                <textarea name="username" placeholder="Nom d'utilisateur" id="zone-texte-username"></textarea>
+                <textarea name="tweet" placeholder="Que se passe-t-il ?" id="zone-texte-tweet"></textarea>
+                <button type="submit" id="bouton-envoi">Tweeter</button>
             </form>
         </section>
         <section class="flux-tweets">
             <h2>Tweets</h2>
-            <ul>
-                <li>
-                    <div class="contenu-tweet">
-                        <strong>Utilisateur1</strong>
-                        <p>Ceci est un tweet de test.</p>
-                    </div>
-                </li>
-                </ul>
+            <ul id="liste-tweets">
+                <!-- Liste des tweets -->
+            </ul>
         </section>
+        <div id="alertBox"></div> <!-- Ajout de l'élément pour afficher les alertes -->
     </main>
+    <script src="script.js"></script>
 </body>
 </html>
