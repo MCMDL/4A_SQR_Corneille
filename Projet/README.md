@@ -1,5 +1,10 @@
-# Rapport du Projet Cloud
-Ce projet a été réalisé par Arnaud Binet et Martin Corneille.  
+# Polychatte
+Polychatte est un site Twitter like dévellopé par Arnaud Binet et Martin Corneille dans le cadre du cours de Cloud Computing à Polytech Dijon.  
+Le nom du site s'explique par un jeu de mot simple entre "Chat", une conversation en ligne, et "chatte", un animal trop mignon :cat2:. De plus le mot Poly devant fait tout droit référence à l'école.  
+
+https://github.com/MCMDL/4A_SQR_Corneille_Binet/assets/103221729/b9e2ccb2-5b92-4e22-bf1a-2a99c3901240  
+
+Démonstration des fonctionnalités de Polychatte
 
 ## Objectifs
 Le but de ce projet est de mettre en place un site Tweeter like. Pour cela on utilsera les langages HTML/CSS/JS pour la partie frontend et Python pour la backend. 
