@@ -1,51 +1,47 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request
+from flask_cors import CORS
 import redis
+import re
 import json
+
 app = Flask(__name__)
-
-
-
-r = redis.Redis(host='localhost', port=6379, db=0,decode_responses=True)
-
-def foundHashtag(str1):
-    list1 = str1.split(" ")
-    topic = []
-    for value in list1:
-        temp = value.find("#")
-        if temp != -1:
-            temp = value.split("#")
-            topic.append(temp[1])
-    return topic
-
-resultats = {}
+r = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)
+CORS(app)
 
 @app.route("/api/tweeter", methods=["POST"])
 def tweeter():
-    #Creation de l'ID du tweet
-    idTweet = r.get("idTweet")
-    if idTweet==None:
-        r.set("idTweet",0)
-    idTweet = int(r.get("idTweet"))
-    idTweet = idTweet +1
-    r.set("idTweet",idTweet)
-    #Recuperation des données puis création du stockage des tweets
+    # Récupération des données JSON envoyées
     data = request.get_json()
-    tweet = data["tweet"]
     username = data["username"]
-    # Dictionnaire JSON pour stocker username et tweet
-    dico = json.dumps({"utilisateur": username, "message": tweet})
-    # Stockage dans Redis
-    r.set(idTweet, dico)
-    #value={"author": username, "tweet": tweet }
-    #Ajout du Tweet à l'utilisateur
-    userKey = "u-"+username
-    r.rpush(userKey,idTweet)
-    #Ajouter de quoi extraire les "#" fonction findall(r"#\w+", tweet)
-    print(username+"\n")
-    print(tweet)
-    temp = "Tweet ajouté : " + tweet +" By :" + username +" Id is : " + str(idTweet)
-    return temp
+    tweet = data["message"]
+    
+    # Incrémentation de l'ID du tweet
+    tweet_id = r.incr("idTweet")
 
+    # Création du dictionnaire tweet_data
+    tweet_data = {
+        "id": tweet_id,
+        "author": username,
+        "hashtags": re.findall(r'#\w+', tweet),
+        "message": tweet,
+        "retweets": []
+    }
+
+    # Stockage du tweet dans Redis
+    r.set(f'tweet:{tweet_id}', json.dumps(tweet_data))
+    r.lpush('tweets', tweet_id)
+
+    # Ajout du tweet à l'utilisateur
+    userKey = "u-" + username
+    r.rpush(userKey, tweet_id)
+
+    # Ajout des hashtags à Redis
+    for hashtag in tweet_data["hashtags"]:
+        r.lpush(f'hashtag:{hashtag}', tweet_id)
+        if r.lpos('hashtags', hashtag) is None:
+            r.lpush('hashtags', hashtag)
+
+    return { "success": True }
 
 @app.route("/api/printTweet", methods=["GET"])
 def printTweet():
