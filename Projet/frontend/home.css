@@ -46,6 +46,15 @@ main {
     resize: none; /* Disable textarea resizing */
 }
 
+#alertBox {
+    display: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
 .nouveau-tweet button {
     background-color: #C49FFF;
     color: #fff;
@@ -96,8 +105,15 @@ main {
 
 .flux-tweets .contenu-tweet strong {
     font-weight: bold;
+    font-size: 1.2em; /* Augmenter la taille du nom d'utilisateur */
 }
 
 .flux-tweets .contenu-tweet p {
     margin: 0;
+}
+
+/* Style pour le nom d'utilisateur dans les tweets */
+.nom-utilisateur {
+    font-weight: bold;
+    font-size: 1.2em;
 }

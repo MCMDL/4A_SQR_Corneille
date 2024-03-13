@@ -5,17 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PolyChatte</title>
     <link rel="stylesheet" href="home.css">
-    <style>
-        /* Style pour l'alerte */
-        #alertBox {
-            display: none;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            color: white;
-            font-weight: bold;
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -24,6 +13,7 @@
     <main>
         <section class="nouveau-tweet">
             <form id="tweetForm"> <!-- Ajout de l'ID au formulaire -->
+                <textarea name="username" placeholder="Nom d'utilisateur" id="zone-texte-username"></textarea>
                 <textarea name="tweet" placeholder="Que se passe-t-il ?" id="zone-texte-tweet"></textarea>
                 <button type="submit" id="bouton-envoi">Tweeter</button>
             </form>
