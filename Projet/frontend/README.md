@@ -8,14 +8,14 @@ L'intégralité du frontend a été réalisé à l'aide de `HTML`, `CSS` et `JS`
 
 ## Aperçu du code
 
-Le code permet de mettre en place certaines des exigences demandées même si le princiaple fonctionne via des commandes curl dans le backend
+Le code permet de mettre en place certaines des exigences demandées même si le principal fonctionne via des commandes `curl` dans le backend
 
 ### Le `HTML`
 
 Le code `HTML` va nous servir à avoir une page internet sur lequel nous baser et voir les modifications appliquées par le `JS`
-Le plus important dans le `HTML` est de placer des balise ou ID pour pouvoir les appeler dans le `JS`
-
-PS : On a voulu apporter une petite touche d'humour sur notre page web, parce que vous devez en avoir marre de corriger des Twitter bleu classique. On espère que vous apprécierez !
+Le plus important dans le `HTML` est de placer des balises ou ID pour pouvoir les appeler dans le `JS`  
+>[!NOTE]
+>PS : On a voulu apporter une petite touche d'humour sur notre page web, parce que vous devez en avoir marre de corriger des Twitter bleus classiques. On espère que vous apprécierez !  
 
 ### Le `CSS`
 
@@ -32,9 +32,9 @@ Il y a 3 fonctions principales dans le `JS` :
 #### Fonction `messageAlert`
 
 Cette fonction permet d'afficher un message d'alerte pour informer l'utilisateur que,
-- Le tweet est poster en `vert`
-- Le tweet est poster mais il y a eu un problème quelque part en `jaune`
-- Le tweet n'est pas poster parce qu'il y a un problème en `rouge`*
+- Le tweet est posté en `vert`
+- Le tweet est posté mais il y a eu un problème quelque part en `jaune`
+- Le tweet n'est pas posté parce qu'il y a un problème en `rouge`*
 
 #### Fonction `displayTweet`
 
@@ -43,10 +43,4 @@ Il ne suffit pas seulement de modifier le `HTML` mais il faut aussi récupérer 
 
 #### Fonction `addTweet`
 
-Cette fonction va récuperer les données mise dans les `textearea` dsur la page `HTML` et va ensuite envoyé ces données au backend, à la base de donnée `redis`
-
-
->[!NOTE]
->DOCKER FILE : FROM nginx COPY ./usr/share/nginx/html
->Pour éxécuter : docker build -t frontend && docker run --rm -p 80.8080 frontend
-
+Cette fonction va récuperer les données mises dans les `textearea` sur la page `HTML` et va ensuite envoyer ces données au backend, dans la base de donnée `redis`
