@@ -16,7 +16,10 @@ Nous avons donc définis les fonctions suivantes :
 - `printTopic`
 - `printTweetsTopic`  
 
-Toutes les fonctions se trouvent après le chemin `api/`.
+Toutes les fonctions se trouvent après le chemin `api/`.  
+
+Pour faire appel à l'API on peut notamment utiliser des commandes `curl`, comme suit avec l'exmple :  
+```curl -X POST -H "Content-Type: application/json" -d '{"username": "votre_nom_utilisateur", "message": "votre_message"}' http://127.0.0.1:5000/api/tweeter```
 
 ### Fonction `tweeter`
 Cette fonction sert à récupérer les informations présentes dans un Tweet i.e, le Tweet, l'utilisateur, et les hashtags présents dans le Tweet. Elle est basée sur un `POST`
